@@ -1,0 +1,30 @@
+.AddProductForm {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.AddProductForm h1 {
+	font-size: 28px;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+
+.AddProductForm select, .AddProductForm input, .AddProductForm textarea {
+	padding: 10px;
+	width: 50%;
+	margin-bottom: 20px;
+}
+
+.AddProductForm textarea {
+	resize: none;
+	height: 100px;
+	font-family: 'Rubik', sans-serif;
+}
+
+.AddProductForm button {
+	padding: 10px 20px;
+	font-size: 18px;
+	font-family: 'Rubik', sans-serif;
+}

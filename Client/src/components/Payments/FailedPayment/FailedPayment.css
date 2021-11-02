@@ -1,0 +1,29 @@
+.FailedPayment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.FailedPayment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.FailedPayment h1 {
+    font-weight: 500;
+    margin-top: 20px;
+    color: var(--default-grey-color);
+}
+
+.FailedPayment h3 {
+    color: var(--default-grey-color);
+    margin-top: 10px;
+    font-weight: 400;
+}
+
+.FailedPayment h3 a {
+    font-weight: 400;
+    color: blue;
+}

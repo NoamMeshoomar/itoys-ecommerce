@@ -1,0 +1,98 @@
+.SingleProduct {
+    display: flex;
+}
+
+.SingleProduct .product_image_container {
+    width: 450px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 60px;
+    border: 1px solid rgb(216, 216, 216);
+}
+
+.SingleProduct .product_details {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.SingleProduct .product_details .upper_product_details {
+    display: flex;
+    flex-direction: column;
+    color: var(--default-grey-color);
+}
+
+.SingleProduct .product_details .upper_product_details h1 {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.SingleProduct .product_details .upper_product_details pre {
+    color: var(--default-lightgrey-color);
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'Rubik', sans-serif;
+    height: fit-content;
+}
+
+.SingleProduct .product_details .lower_product_details {
+    display: flex;
+    flex-direction: column;
+}
+
+.SingleProduct .product_details .lower_product_details div input[type=number] {
+    padding: 0 5px 0 5px;
+    width: 60px;
+    height: 40px;
+    margin-left: 20px;
+    border: none;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.SingleProduct .product_details .lower_product_details div input[type=number]::-webkit-inner-spin-button {
+    opacity: 1
+}
+
+.SingleProduct .product_details .lower_product_details div h3 {
+    color: var(--default-lightgrey-color);
+    font-size: 18px;
+    font-weight: 400;
+}
+
+@media screen and (max-width: 1240px) {
+    .SingleProduct {
+        width: 100vw;
+        justify-content: center;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .SingleProduct {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .SingleProduct .product_image_container {
+        margin: 0;
+    }
+
+    .SingleProduct .product_details .upper_product_details h1 {
+        margin-top: 20px;
+    }
+
+    .SingleProduct .product_details .upper_product_details p {
+        color: var(--default-lightgrey-color);
+        margin-bottom: 100px;
+    }
+}
+
+@media screen and (max-width: 455px) {
+    .SingleProduct .product_image_container {
+        width: 100vw;
+        height: 420px;
+    }
+}

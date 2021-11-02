@@ -1,0 +1,12 @@
+.LastestProducts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.LastestProducts h1 {
+    margin-bottom: 20px;
+    color: var(--default-grey-color);
+    font-weight: 500;
+}

@@ -1,0 +1,71 @@
+.CartTable {
+    width: 100%;
+    color: var(--default-grey-color);
+}
+
+.CartTable table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.CartTable table, .CartTable th, .CartTable td {
+    padding: 10px 5px;
+    border: 2px solid var(--default-blue-hover-color);
+}
+
+.CartTable th {
+    background-color: var(--default-blue-color);
+    color: var(--default-white-color);
+    font-weight: 500;
+    border: none;
+}
+
+.CartTable td button {
+    font-weight: 600;
+    font-size: 24px;
+    font-family: 'Rubik', sans-serif;
+    color: rgb(255, 83, 53);
+    width: 50px;
+    border: none;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background: transparent;
+    cursor: pointer;
+}
+
+.CartTable td button:hover {
+    font-size: 32px;
+}
+
+.CartTable input[type="number"] {
+    width: 50px;
+    padding: 5px 5px;
+    border: 1px solid var(--default-blue-color);
+}
+
+.CartTable input[type="number"]::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+.CartTable .empty__cart {
+    font-weight: 500;
+}
+
+@media screen and (max-width: 1240px) {
+    .CartTable {
+        margin-bottom: 20px;
+    }
+
+    .CartTable h3 {
+        text-align: center;
+    }
+
+    .CartTable table {
+        width: 100vw;
+        margin: 0 auto;
+    }
+}

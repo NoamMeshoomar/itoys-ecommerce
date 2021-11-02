@@ -1,0 +1,100 @@
+.OrdersTable {
+    width: 50%;
+}
+
+.OrdersTable h1 {
+    color: var(--default-grey-color);
+    font-weight: 500;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.OrdersTable .type__bar {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--default-blue-color);
+    margin-bottom: 20px;
+}
+
+.OrdersTable .type__bar h3 {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--default-white-color);
+}
+
+.OrdersTable .orders {
+    display: grid;
+    grid-row-gap: 20px;
+}
+
+.OrdersTable .orders .order {
+    width: 100%;
+    height: 75px;
+    background-color: rgb(236, 236, 236);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+    font-family: 'Rubik', sans-serif;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.OrdersTable .orders .order:hover {
+    background-color: rgb(236 236 236);
+}
+
+.OrdersTable .orders .order h3 {
+    color: var(--default-grey-color);
+    font-weight: 400;
+}
+
+.OrdersTable .orders .order .order_status {
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--default-white-color);
+    width: 66px;
+}
+
+.OrdersTable .order_details {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgb(236, 236, 236);
+}
+
+.OrdersTable .order_products .products {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 20px;
+    color: var(--default-grey-color);
+}
+
+.OrdersTable .order_products .products .product img {
+    width: 50px;
+}
+
+.OrdersTable .order_shipping_address .address {
+    color: var(--default-grey-color);
+}
+
+@media screen and (max-width: 590px) {
+    .OrdersTable h1 {
+        text-align: center;
+    }
+
+    .OrdersTable .type__bar {
+        width: 100vw;
+        margin: 0 auto 20px auto;
+    }
+
+    .OrdersTable .orders .order {
+        width: 100vw;
+        margin: 0 auto;
+    }
+}

@@ -1,0 +1,148 @@
+.NavBarUp {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.NavBarUp a img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.NavBarUp .navbarup__right .search {
+    position: relative;
+}
+
+.NavBarUp .navbarup__right .search svg {
+    z-index: 5;
+    cursor: pointer;
+}
+
+.NavBarUp .navbarup__right .search input {
+    width: 200px;
+    padding: 0 0 5px 0;
+    position: absolute;
+    font-size: 18px;
+    font-weight: 600;
+    right: 30px;
+    border: none;
+    border-bottom: 1px solid var(--default-grey-color);
+    color: var(--default-grey-color);
+    background-color: transparent;
+    z-index: 1;
+}
+
+.NavBarUp .navbarup__right .search input::placeholder {
+    font-weight: 400;
+}
+
+.NavBarUp .navbarup__left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.NavBarUp .navbarup__left a {
+    position: relative;
+    text-decoration: none;
+}
+
+.NavBarUp .navbarup__left .user {
+    position: relative;
+    margin-right: 20px;
+}
+
+.NavBarUp .cart-circle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    background-color: rgb(255, 83, 53);
+    color: var(--default-white-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -3px;
+    right: -3px;
+}
+
+.NavBarUp .cart-circle h5 {
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.NavBarUp .menu {
+    position: absolute;
+    padding: 20px;
+    left: 0;
+    background-color: var(--default-white-color);
+    box-shadow: var(--default-shadow-value);
+    z-index: 999;
+}
+
+.NavBarUp .menu h3,
+.NavBarUp .menu p {
+    color: var(--default-grey-color);
+}
+
+.NavBarUp .menu .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.NavBarUp .menu .buttons a,
+.NavBarUp .menu .buttons button {
+    width: 100%;
+    text-align: center;
+    background-color: var(--default-blue-color);
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--default-white-color);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.NavBarUp .menu .buttons a {
+    margin-bottom: 5px;
+}
+
+.NavBarUp .menu .buttons button:hover,
+.NavBarUp .menu .buttons a:hover {
+    background-color: var(--default-blue-hover-color);
+}
+
+.NavBarUp .menu:first-child {
+    margin: 20px 0 10px 0;
+}
+
+@media screen and (max-width: 1240px) {
+    .NavBarUp {
+        padding: 0 20px;
+        width: 100vw;
+    }
+
+    .NavBarUp a img {
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .NavBarUp .navbarup__right .search input {
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .NavBarUp .navbarup__right .search input {
+        width: 100px;
+    }
+}

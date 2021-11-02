@@ -1,0 +1,13 @@
+.Cart {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1240px) {
+    .Cart {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}

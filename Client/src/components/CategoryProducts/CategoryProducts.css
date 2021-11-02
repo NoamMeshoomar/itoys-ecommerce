@@ -1,0 +1,16 @@
+.CategoryProducts {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 1240px) {
+    .CategoryProducts {
+        width: 100vw;
+        margin: 0 auto;
+    }
+
+    .CategoryProducts h1 {
+        text-align: center;
+    }
+}

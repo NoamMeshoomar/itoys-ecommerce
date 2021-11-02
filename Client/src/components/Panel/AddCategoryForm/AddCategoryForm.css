@@ -1,0 +1,25 @@
+.AddCategoryForm {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+.AddCategoryForm h1 {
+	font-size: 28px;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+
+.AddCategoryForm input {
+	width: 50%;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.AddCategoryForm button {
+	padding: 10px 20px;
+	font-size: 18px;
+	font-family: 'Rubik', sans-serif;
+}

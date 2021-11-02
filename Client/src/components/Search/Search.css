@@ -1,0 +1,10 @@
+@media screen and (max-width: 1240px) {
+    .Search {
+        width: 100vw;
+        margin: 0 auto;
+    }
+
+    .Search h1 {
+        margin-right: 20px;
+    }
+}

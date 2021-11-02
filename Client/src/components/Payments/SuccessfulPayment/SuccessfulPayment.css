@@ -1,0 +1,29 @@
+.SuccessfulPayment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SuccessfulPayment .payment__successful {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.SuccessfulPayment .payment__successful h1 {
+    font-weight: 500;
+    margin-top: 20px;
+    color: var(--default-grey-color);
+}
+
+.SuccessfulPayment .payment__successful h3 {
+    color: var(--default-grey-color);
+    margin-top: 10px;
+    font-weight: 400;
+}
+
+.SuccessfulPayment .payment__successful h3 a {
+    font-weight: 400;
+    color: blue;
+}
