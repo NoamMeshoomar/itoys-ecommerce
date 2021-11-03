@@ -1,4 +1,4 @@
-# itoys-ecommerce
+# iToys Ecommerce
 
 iToys is an online store that selling toys for kids with Accounts, Categories, Cart & PayPal payment method.
 
