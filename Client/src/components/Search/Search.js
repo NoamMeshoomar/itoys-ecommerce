@@ -38,11 +38,7 @@ const Search = () => {
                     { products.map(product => {
                         return <ProductCard
                             key={ product._id }
-                            _id={ product._id } 
-                            id={ product.id } 
-                            image={ product.image } 
-                            title={ product.title } 
-                            price={ product.price } 
+                            product={ product }
                         />
                     }) }
                 </div>

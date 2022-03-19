@@ -2,15 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
-require('dotenv').config();
+const fileupload = require("express-fileupload");
+// require('dotenv').config();
 
 const app = express();
 
 app.use(cors());
 app.use(helmet());
-
+app.use(fileupload({createParentPath: true}));
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
 
 const usersRoute = require('./routes/users');
 const productsRoute = require('./routes/products');

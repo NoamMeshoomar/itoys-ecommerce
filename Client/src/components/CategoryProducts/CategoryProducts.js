@@ -35,7 +35,7 @@ const CategoryProducts = () => {
             { loading ? <div style={ { width: '100%', margin: '0 auto', textAlign: 'center' } }><img src={ LoadingGif } width="50" alt=""/></div> : <>
                 { products.length === 0 ? <h1 style={ { color: 'var(--default-grey-color)', fontSize: 28, fontWeight: 500 } }>לא נמצאו מוצרים בקטגוריה זו</h1> : <div className="products__grid">
                     { products.map(product => {
-                        return <ProductCard key={ product._id } _id={ product._id } id={ product.id } image={ product.image } title={ product.title } price={ product.price } />
+                        return <ProductCard key={ product._id } product={product} />
                     }) }
                 </div> }
             </> }

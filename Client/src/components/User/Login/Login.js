@@ -19,7 +19,7 @@ const Login = () => {
         dispatch(login({ email, password }));
     }
 
-    if(userState.isLogged) return <Redirect to="/account" />
+    if(userState.isLogged) return <Redirect to="/" />
 
     return(
         <div className="Login">

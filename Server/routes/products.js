@@ -4,7 +4,6 @@ const router = express();
 
 const auth = require('../middlewares/verifyToken');
 const isAdmin = require('../middlewares/verifyAdmin');
-const upload = require('../middlewares/uploadImage');
 
 const {
     searchBar,
@@ -12,14 +11,16 @@ const {
     getLastestProducts,
     getRandomProducts,
     getCategoryProducts,
-    addProduct
+    addProduct,
+    editProduct
 } = require('../controllers/products');
 
 router.post('/search', searchBar);
+router.post('/', auth, isAdmin, addProduct);
 router.get('/single/:id', getSingleProduct);
 router.get('/lastest', getLastestProducts);
 router.get('/category/:id', getCategoryProducts);
 router.get('/random', getRandomProducts);
-router.post('/', auth, isAdmin, upload.single('product'), addProduct);
+router.put("/edit/:productId", auth, isAdmin, editProduct);
 
 module.exports = router;

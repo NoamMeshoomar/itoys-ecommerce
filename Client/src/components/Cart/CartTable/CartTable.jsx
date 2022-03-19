@@ -10,7 +10,7 @@ const CartTable = () => {
 
     return(
         <div className="CartTable">
-            { cart.products.length === 0 ? <div>
+            {cart.products.length === 0 ? <div>
                 <h3 className="empty__cart">עגלת הקניות ריקה כרגע.</h3>
             </div> : <table>
                 <thead>
@@ -24,11 +24,11 @@ const CartTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    { [...cart.products].reverse().map(item => {
-                        return <CartItem key={ item._id } item={ item } />
-                    }) }
+                    {cart.products.reverse().map(item => {
+                        return <CartItem key={item._id} item={item} />
+                    })}
                 </tbody>
-            </table> }
+            </table>}
         </div>
     )
 }

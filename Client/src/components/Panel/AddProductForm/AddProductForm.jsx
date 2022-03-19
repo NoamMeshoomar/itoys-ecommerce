@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import Axios from '../../../utils/Axios';
+import axios from '../../../utils/Axios';
 
 import './AddProductForm.css';
 
@@ -25,11 +25,12 @@ const AddProductForm = () => {
 		formData.append('price', +price);
 		formData.append('quantity', +quantity);
 		formData.append('category', category);
-		formData.append('product', file);
+		formData.append('file', file);
 
-		Axios.post('/products', formData, {
+		axios.post('/products', formData, {
 			headers: {
-				'token': localStorage.getItem('token')
+				token: localStorage.getItem('token'),
+                "Content-Type": "application/x-www-form-urlencoded"
 			}
 		})
 		.then(res => console.log(res))

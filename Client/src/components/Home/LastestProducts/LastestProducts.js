@@ -25,20 +25,12 @@ const LastestProducts = () => {
 
     return(
         <div className="LastestProducts">
-            <h1>המוצרים האחרונים</h1>
-            { loading ? <img src={ LoadingGif } width="50" alt="" /> : 
-                <div className="products__grid">
-                    { lastestProducts.map(product => {
-                        return <ProductCard 
-                            key={ product._id }
-                            _id={ product._id }
-                            id={ product.id } 
-                            image={ product.image } 
-                            title={ product.title } 
-                            price={ product.price } 
-                        />
-                    }) }
-                </div> }
+            <h1>מוצרים חדשים</h1>
+            {loading ? <img src={ LoadingGif } width="50" alt="" /> : <div className="products__grid">
+                {lastestProducts.map(product => {
+                    return <ProductCard key={product._id} product={product} />
+                })}
+            </div>}
         </div>
     )
 }
