@@ -102,16 +102,16 @@ const SingleProduct = () => {
                 </div>
                 <div className="product_details">
                     <div className="upper_product_details">
-                        {(!editModeTitle && user?.isAdmin) ? 
+                        {(!user?.isAdmin || !editModeTitle) ? 
                             <h1 onClick={handleEditTitle}>
                                 {product.title}
                             </h1> : 
-                            <input type="text" style={{padding: 10}} defaultValue={product.title} onKeyUp={handleChangeInput} />}
-                        {(!editModeDescription && user?.isAdmin) ? 
+                            <input type="text" style={{padding: 10, fontSize: 28, fontWeight: 500, fontFamily: '"Rubik", sans-serif', color: "var(--default-grey-color)"}} defaultValue={product.title} onKeyUp={handleChangeInput} />}
+                        {(!user?.isAdmin || !editModeDescription) ? 
                             <pre onClick={handleEditDescription}>
                                 {product.description}
                             </pre> : 
-                            <textarea defaultValue={product.description} rows="12" cols="50" style={{resize: "none"}} onKeyUp={handleChangeDescription} />
+                            <textarea style={{resize: "none", color: "var(--default-lightgrey-color)", fontFamily: '"Rubik", sans-serif', fontSize: 18, fontWeight: 400}} defaultValue={product.description} rows="10" cols="50" onKeyUp={handleChangeDescription} />
                         }
                     </div>
                     <div className="lower_product_details">

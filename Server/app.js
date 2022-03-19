@@ -3,7 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const fileupload = require("express-fileupload");
-// require('dotenv').config();
+require('dotenv').config();
 
 const app = express();
 
