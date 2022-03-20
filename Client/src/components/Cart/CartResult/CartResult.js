@@ -18,22 +18,16 @@ const CartResult = () => {
             }
         })
         .then(res => {
-            const paymentUrl = res.data.paymentUrl;
-
-            for(let i = 0; i < paymentUrl.length; i++) {
-                if(paymentUrl[i].rel === 'approval_url'){
-                    window.location.assign(paymentUrl[i].href);
-                    break;
-                }
-            }
+            const {paymentLink} = res.data;
+            window.location.assign(paymentLink);
         })
         .catch(err => console.error(err.response));
     }
 
     return(
         <div className="CartResult">
-            <h3 style={ { color: '#fff', fontWeight: 400 } }>סה"כ { totalPrice.toFixed(2) } ₪</h3>
-            <img src={ paypalBtn } alt="" onClick={ handlePayment } />
+            <h3 style={{color: '#fff', fontWeight: 400}}>סה"כ {totalPrice.toFixed(2)} ₪</h3>
+            <img src={paypalBtn} alt="paypal payment button" onClick={handlePayment} />
         </div>
     )
 }

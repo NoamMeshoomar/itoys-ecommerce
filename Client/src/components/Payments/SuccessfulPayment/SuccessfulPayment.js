@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import Axios from '../../../utils/Axios';
 import { removeAllFromCart } from '../../../actions/cartActions';
+import axios from '../../../utils/Axios';
 
 import loadingGif from '../../../assets/images/Loading.gif';
 import checkImage from '../../../assets/images/check.svg';
@@ -14,13 +14,15 @@ const SuccessfulPayment = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const paymentID = new URLSearchParams(window.location.search).get('paymentId');
-        const payerID = new URLSearchParams(window.location.search).get('PayerID');
+    const location = useLocation();
 
-        Axios({
+    useEffect(() => {
+        const paymentID = new URLSearchParams(location.search).get("paymentId");
+        const payerID = new URLSearchParams(location.search).get("PayerID");
+
+        axios({
             method: 'POST',
-            url: `/cart/execute_payment?paymentID=${ paymentID }&payerID=${ payerID }`,
+            url: `/cart/execute_payment/${paymentID}/${payerID}`,
             headers: {
                 'token': localStorage.getItem('token')
             }
@@ -30,7 +32,7 @@ const SuccessfulPayment = () => {
             dispatch(removeAllFromCart());
         })
         .catch(err => console.error(err));
-    }, [dispatch]);
+    }, [dispatch, location.search]);
 
     return(
         <div className="SuccessfulPayment">

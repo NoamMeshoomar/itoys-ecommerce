@@ -15,7 +15,7 @@ const {
     editProduct
 } = require('../controllers/products');
 
-router.post('/search', searchBar);
+router.post('/search/:searchQuery', searchBar);
 router.post('/', auth, isAdmin, addProduct);
 router.get('/single/:id', getSingleProduct);
 router.get('/lastest', getLastestProducts);

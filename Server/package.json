@@ -19,6 +19,7 @@
     "mongoose": "^5.12.1",
     "multer": "^1.4.3",
     "multer-sftp": "^1.1.1",
+    "paypal-node-sdk": "^2.0.3",
     "queue": "^6.0.2",
     "request": "^2.88.2",
     "shortid": "^2.2.16",

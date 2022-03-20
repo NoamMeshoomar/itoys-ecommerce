@@ -25,11 +25,10 @@
 }
 
 .ProductCard img {
-    padding: 10px;
     width: 100%;
     height: 180px;
     margin-bottom: 20px;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .ProductCard .bottom__information {

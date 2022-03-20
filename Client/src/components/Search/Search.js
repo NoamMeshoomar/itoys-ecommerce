@@ -18,10 +18,7 @@ const Search = () => {
         setLoading(true);
         Axios({
             method: 'POST',
-            url: '/products/search',
-            data: {
-                searchQuery: searchText
-            }
+            url: `/products/search/${searchText}`
         })
         .then(res => {
             setProducts(res.data.products);
@@ -32,17 +29,17 @@ const Search = () => {
 
     return(
         <div className="Search">
-            { loading ? <div style={ { width: '100%', textAlign: 'center' } }><img src={ loadingGif } width="50" alt=""/></div> : <Fragment>
-                <h1 style={ { marginBottom: 20, fontSize: 28, fontWeight: 500, color: 'var(--default-grey-color)' } }>תוצאות חיפוש ל- "{ searchText }"</h1>
+            {loading ? <div style={{width: '100%', textAlign: 'center'}}><img src={loadingGif} width="50" alt=""/></div> : <Fragment>
+                <h1 style={{marginBottom: 20, fontSize: 28, fontWeight: 500, color: 'var(--default-grey-color)'}}>תוצאות חיפוש ל- "{searchText}"</h1>
                 <div className="products__grid">
-                    { products.map(product => {
+                    {products.map(product => {
                         return <ProductCard
-                            key={ product._id }
-                            product={ product }
+                            key={product._id}
+                            product={product}
                         />
-                    }) }
+                    })}
                 </div>
-            </Fragment> }
+            </Fragment>}
         </div>
     )
 }

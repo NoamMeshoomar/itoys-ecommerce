@@ -1,9 +1,16 @@
 const request = require('request');
+const paypal = require('paypal-node-sdk');
 
 const Cart = require('../models/Cart');
 const Orders = require('../models/Orders');
 
 const PAYPAL_API = 'https://api-m.paypal.com';
+
+paypal.configure({
+    'mode': 'sandbox',
+    'client_id': process.env.PAYPAL_PUBLIC_KEY,
+    'client_secret': process.env.PAYPAL_SECRET_KEY
+});
 
 module.exports = {
     getUserCart: (req, res) => {
@@ -63,101 +70,96 @@ module.exports = {
             }
 
             if(totalPrice === 0) throw "העגלה ריקה.";
-    
-            request.post(PAYPAL_API + '/v1/payments/payment', {
-                auth: {
-                    user: process.env.PAYPAL_PUBLIC_KEY,
-                    pass: process.env.PAYPAL_SECRET_KEY
-                },
-                body: {
-                    intent: 'sale',
+
+            const newPayment = {
+                intent: "sale",
                 payer: {
-                    payment_method: 'paypal'
+                    payment_method: "paypal"
+                },
+                redirect_urls: {
+                    return_url: 'https://itoys.netlify.app/success',
+                    cancel_url: 'https://itoys.netlify.app/failed',
                 },
                 transactions: [{
+                    item_list: {
+                        items: cartProduct.map(cart => ({
+                            name: cart.productId.title,
+                            price: cart.productId.price,
+                            currency: "ILS",
+                            quantity: cart.quantity
+                        }))
+                    },
                     amount: {
                         total: totalPrice,
                         currency: 'ILS'
-                    }
-                }],
-                redirect_urls: {
-                    return_url: 'https://itoys.netlify.app/success',
-                    cancel_url: 'https://itoys.netlify.app/failed'
-                }
-            },
-            json: true
-            }, (err, response) => {
-                if(err) return res.status(400).json({err});
-                res.status(200).json({paymentUrl: response.body.links});
+                    },
+                }]
+            }
+            
+            paypal.payment.create(newPayment, (err, response) => {
+                if(err) throw err;
+                const paymentLink = (response.links.find(link => link.rel === "approval_url")).href;
+                res.status(200).json({paymentLink});
             });
         } catch (err) {
             res.status(400).json({err});
         }
     },
-    executePayment: (req, res) => {
-        const {paymentID, payerID} = req.query;
+    executePayment: async (req, res) => {
+        const {paymentID, payerID} = req.params;
 
         let totalPrice = 0;
 
-        Cart.find({ userId: req.user._id }).populate('productId')
-        .then(doc => {
-            for(let i = 0; i < doc.length; i++) {
-                totalPrice += doc[i].productId.price * doc[i].quantity;
+        try {
+            const cartProducts = await Cart.find({ userId: req.user._id }).populate('productId');
+    
+            for(let i = 0; i < cartProducts.length; i++) {
+                totalPrice += cartProducts[i].productId.price * cartProducts[i].quantity;
             }
-        })
-        .then(() => {
-            if(totalPrice === 0) return res.status(400).json({ message: 'העגלה ריקה.' });
 
-            request.post(PAYPAL_API + '/v1/payments/payment/' + paymentID + '/execute', {
-                auth: {
-                    user: process.env.PAYPAL_PUBLIC_KEY,
-                    pass: process.env.PAYPAL_SECRET_KEY
-                },
-                body: {
-                    payer_id: payerID,
-                    transactions: [{
-                        amount: {
-                            total: totalPrice,
-                            currency: 'ILS'
-                        }
-                    }]
-                },
-                json: true
-            }, async (err, response) => {
-                if(err) return res.status(500).json({ err });
+            if(totalPrice == 0) throw "העגלה ריקה.";
 
-                if(response.body.state === 'approved') {
-                    const cartProducts = await Cart.find({ userId: req.user._id }).populate('productId');
+            const execute_payment_json = {
+                "payer_id": payerID,
+                "transactions": [{
+                    "amount": {
+                        "currency": "ILS",
+                        "total": totalPrice
+                    }
+                }]
+            };
 
+            paypal.payment.execute(paymentID, execute_payment_json, async (err, payment) => {
+                if(err) throw err;
+                if(payment.state === 'approved') {
                     const orderProducts = [];
-
+    
                     for(let i = 0; i < cartProducts.length; i++) {
                         orderProducts.push({
+                            id: cartProducts[i].id,
+                            imageType: cartProducts[i].imageType,
                             quantity: cartProducts[i].quantity,
-                            image: cartProducts[i].productId.image,
                             title: cartProducts[i].productId.title,
                             price: cartProducts[i].productId.price,
-                            totalPrice: cartProducts[i].productId.price * cartProducts[i].quantity
                         });
                     }
-
+    
                     const newOrder = new Orders({
                         userId: req.user._id,
                         totalPrice,
-                        shippingAddress: { ...response.body.payer.payer_info.shipping_address },
-                        products: [ ...orderProducts ]
+                        shippingAddress: {...payment.payer.payer_info.shipping_address},
+                        products: [...orderProducts]
                     });
+    
+                    await newOrder.save();
+                    await Cart.deleteMany({userId: req.user._id});
 
-                    await newOrder.save()
-                    .then(() => {
-                        Cart.deleteMany({ userId: req.user._id })
-                        .then(() => res.status(200).json({ response }))
-                        .catch(err => res.status(400).json({ err }));
-                    })
+                    res.status(200).json("התשלום בוצע בהצלחה!");
                 }
-            })
-        })
-        .catch(err => res.status(400).json({ err }));
+            });
+        } catch (err) {
+            res.status(400).json(err);
+        }
     },
     updateQuantity: async (req, res) => {
         const { product, quantity } = req.body;

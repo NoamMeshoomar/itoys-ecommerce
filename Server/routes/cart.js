@@ -18,7 +18,7 @@ router.get('/', auth, getUserCart);
 router.get('/total', auth, getTotalPrice);
 router.post('/', auth, addToCart);
 router.post('/create_payment', auth, createPayment);
-router.post('/execute_payment', auth, executePayment);
+router.post('/execute_payment/:paymentID/:payerID', auth, executePayment);
 router.put('/', auth, updateQuantity);
 router.delete('/', auth, removeFromCart);
 

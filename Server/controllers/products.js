@@ -19,29 +19,29 @@ const UPLOAD_TO_PATH = "/home/projwhwl/public_html/uploads";
 
 module.exports = {
     searchBar: (req, res) => {
-        const { searchQuery } = req.body;
+        const {searchQuery} = req.params;
 
-        Products.find({ title: { $regex: '.*' + searchQuery + '.*', $options: 'i' } })
-            .then(products => res.status(200).json({ products }))
-            .catch(err => res.status(400).json({ err }));
+        Products.find({ title: {$regex: '.*' + searchQuery + '.*', $options: 'i'}})
+            .then(products => res.status(200).json({products}))
+            .catch(err => res.status(400).json({err}));
     },
     getSingleProduct: (req, res) => {
-        const { id } = req.params;
+        const {id} = req.params;
 
         Products.findOne({ id }).populate('category')
-            .then(product => res.status(200).json({ product }))
-            .catch(() => res.status(404).json({ error: 'המוצר אינו נמצא' }));
+            .then(product => res.status(200).json({product}))
+            .catch(() => res.status(404).json({error: 'המוצר אינו נמצא'}));
     },
     getLastestProducts: (req, res) => {
-        const { limit } = req.query;
+        const {limit} = req.query;
 
         Products.find().sort('-createdAt').limit(limit < 0 || limit > 50 ? 50 : Number(limit))
         .then(products => res.status(200).json({ products }))
         .catch(err => res.status(400).json({ err }));
     },
     getCategoryProducts: async (req, res) => {
-        const { id } = req.params;
-        const { skip, limit } = req.query;
+        const {id} = req.params;
+        const {skip, limit} = req.query;
 
         try {
             const categoryExist = await Categories.findById(id);
