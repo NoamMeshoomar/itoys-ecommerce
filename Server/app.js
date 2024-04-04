@@ -3,7 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const fileupload = require("express-fileupload");
-require('dotenv').config();
+// require('dotenv').config();
 
 const app = express();
 
@@ -11,6 +11,8 @@ app.use(cors());
 app.use(helmet());
 app.use(fileupload({createParentPath: true}));
 app.use(express.json());
+
+app.use("/uploads", express.static("uploads"));
 
 const usersRoute = require('./routes/users');
 const productsRoute = require('./routes/products');
@@ -25,7 +27,7 @@ mongoose.connect(process.env.MONGODB_URI, {
     useFindAndModify: false
 }, () => console.log('Connected to MongoDB'));
 
-const beginUrl = '/api/v1';
+const beginUrl = '/api';
 
 app.use(`${ beginUrl }/users`, usersRoute);
 app.use(`${ beginUrl }/products`, productsRoute);
